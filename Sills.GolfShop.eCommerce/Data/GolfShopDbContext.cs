@@ -9,6 +9,7 @@ namespace Sills.GolfShop.eCommerceAPI.Data
             public DbSet<Product> Products { get; set; }
             public DbSet<Categories> Categories { get; set; }
             public DbSet<Sales> Sales { get; set; }
+            public DbSet<ProductSales> ProductSales { get; set; }
     }
 }
 

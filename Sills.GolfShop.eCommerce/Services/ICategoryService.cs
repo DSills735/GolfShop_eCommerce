@@ -26,11 +26,15 @@ public class CategoryService : ICategoryService
 
     public async Task<List<Categories>> GetAllCategoriesAsync()
     {
-        return await _context.Categories.ToListAsync();
+        return await _context.Categories
+            .Where(c => c.DeletedAt == null)
+            .ToListAsync();
     }
     public async Task<Categories> GetCategoryByIdAsync(int id)
     {
-        return await _context.Categories.FindAsync(id);
+        return await _context.Categories
+            .Where(c => c.DeletedAt == null)
+            .FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<Categories> CreateCategoryAsync(Categories category)
@@ -59,7 +63,7 @@ public class CategoryService : ICategoryService
         {
             return;
         }
-        _context.Categories.Remove(category);
+        category.DeletedAt = DateTime.UtcNow;
         await _context.SaveChangesAsync();
     }
 
