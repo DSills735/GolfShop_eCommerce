@@ -7,8 +7,6 @@
 
         public string shippingAddress { get; set; } = string.Empty;
 
-        // add total price?
-
-        // need m2m rel with product
+        public List<ProductSales> ProductSales { get; } = [];
     }
 }
