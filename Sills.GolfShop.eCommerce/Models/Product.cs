@@ -10,6 +10,6 @@
         public DateTime? DeletedAt { get; set; }
 
         public List<ProductSales> ProductSales { get; } = [];
-        public object CategoryId { get; internal set; }
+        public int CategoryId { get; internal set; }
     }
 }
