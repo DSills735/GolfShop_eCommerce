@@ -45,7 +45,9 @@ namespace Sills.GolfShop.eCommerceAPI.Services
 
         public async Task UpdateProductAsync(int id, Product product)
         {
-            var existingProduct = await _context.Products.FindAsync(id);
+            var existingProduct = await _context.Products
+                .Where(p => p.DeletedAt == null)
+                .FirstOrDefaultAsync(p => p.Id == id);
             if (existingProduct == null)
             {
                 return;
