@@ -4,6 +4,8 @@ using Sills.GolfShop.eCommerceAPI.Models;
 
 namespace Sills.GolfShop.eCommerceAPI.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class SalesController(ISalesService salesService) : ControllerBase
     {
         private readonly ISalesService _salesService = salesService;

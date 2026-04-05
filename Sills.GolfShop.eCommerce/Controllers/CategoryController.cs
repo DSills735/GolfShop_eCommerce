@@ -4,6 +4,8 @@ using Sills.GolfShop.eCommerceAPI.Services;
 
 namespace Sills.GolfShop.eCommerceAPI.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class CategoryController(ICategoryService categoryService) : ControllerBase
 
     {
@@ -12,7 +14,7 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
         [HttpGet]
         public ActionResult<List<Categories>> GetAllCategories()
         {
-            var categories = _categoryService.GetAllCategoriesAsync();
+            var categories = _categoryService.GetAllCategoriesAsync().Result;
             return Ok(categories);
         }
 

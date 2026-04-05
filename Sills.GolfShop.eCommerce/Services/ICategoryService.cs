@@ -35,6 +35,7 @@ public class CategoryService : ICategoryService
         return await _context.Categories
             .Where(c => c.DeletedAt == null)
             .FirstOrDefaultAsync(c => c.Id == id);
+            
     }
 
     public async Task<Categories> CreateCategoryAsync(Categories category)
