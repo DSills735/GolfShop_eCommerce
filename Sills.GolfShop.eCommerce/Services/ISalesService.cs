@@ -9,6 +9,7 @@ namespace Sills.GolfShop.eCommerceAPI.Services
         Task<List<Sales>> GetAllSalesAsync();
         Task<Sales> GetSaleByIdAsync(int id);
         Task<Sales> CreateSaleAsync(Sales sale);
+        Task DeleteSaleAsync(int id);
         Task UpdateSaleAsync(int id, Sales sale);
 
 

@@ -43,7 +43,7 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
             _salesService.UpdateSaleAsync(id, sale).Wait();
             return NoContent();
         }
-        /*
+        
         [HttpDelete("{id}")]
                 public IActionResult DeleteSale(int id)
         {
@@ -55,6 +55,6 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
             _salesService.DeleteSaleAsync(id).Wait();
             return NoContent();
         }
-        */
+        
     }
 }
