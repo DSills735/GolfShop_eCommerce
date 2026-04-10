@@ -1,6 +1,7 @@
 ﻿using Sills.GolfShop.eCommerceAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Sills.GolfShop.eCommerceAPI.Models;
+using Sills.GolfShop.eCommerceAPI.Helpers;
 
 namespace Sills.GolfShop.eCommerceAPI.Controllers
 {
@@ -11,9 +12,15 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
         private readonly ISalesService _salesService = salesService;
 
         [HttpGet]
-        public ActionResult<List<Sales>> GetAllSales()
+        public ActionResult<List<Sales>> GetAllSales(PaginationParameters param)
         {
             var sales = _salesService.GetAllSalesAsync().Result;
+
+            var pagedSales = sales
+                   .Skip((param.PageNumber - 1) * param.PageSize)
+                   .Take(param.PageSize)
+                   .ToList();
+
             return Ok(sales);
         }
         [HttpGet("{id}")]

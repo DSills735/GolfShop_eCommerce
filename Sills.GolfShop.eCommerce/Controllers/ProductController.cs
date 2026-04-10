@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sills.GolfShop.eCommerceAPI.Helpers;
 using Sills.GolfShop.eCommerceAPI.Models;
 using Sills.GolfShop.eCommerceAPI.Services;
 
@@ -12,9 +13,13 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
         private readonly IProductsService _productService = productsService;
 
         [HttpGet]
-        public ActionResult<List<Product>> GetAllProducts()
+        public ActionResult<List<Product>> GetAllProducts(PaginationParameters param)
         {
             var products = _productService.GetAllProductsAsync().Result;
+            var pagedProducts = products
+                .Skip((param.PageNumber - 1) * param.PageSize)
+                .Take(param.PageSize)
+                .ToList();
             return Ok(products);
         }
 
