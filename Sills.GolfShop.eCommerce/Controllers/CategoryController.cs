@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sills.GolfShop.eCommerceAPI.Models;
 using Sills.GolfShop.eCommerceAPI.Services;
+using Sills.GolfShop.eCommerceAPI.Helpers;
 
 namespace Sills.GolfShop.eCommerceAPI.Controllers
 {
@@ -12,10 +13,16 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
         private readonly ICategoryService _categoryService = categoryService;
 
         [HttpGet]
-        public ActionResult<List<Categories>> GetAllCategories()
+        public ActionResult<List<Categories>> GetAllCategories(PaginationParameters param)
         {
             var categories = _categoryService.GetAllCategoriesAsync().Result;
-            return Ok(categories);
+
+            var pagedCategories = categories.Where(c => c.DeletedAt == null)
+                   .Skip((param.PageNumber - 1) * param.PageSize)
+                   .Take(param.PageSize)
+                   .ToList();
+
+            return Ok(pagedCategories);
         }
 
         [HttpGet("{id}")]
