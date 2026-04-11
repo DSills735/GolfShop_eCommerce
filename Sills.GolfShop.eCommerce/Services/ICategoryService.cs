@@ -8,7 +8,7 @@ namespace Sills.GolfShop.eCommerceAPI.Services
 
     public interface ICategoryService
     {
-        Task<List<Categories>> GetAllCategoriesAsync();
+        IQueryable<Categories> GetAllCategoriesQuery();
         Task<Categories> GetCategoryByIdAsync(int id);
         Task<Categories> CreateCategoryAsync(Categories category);
         Task UpdateCategoryAsync(int id, Categories category);
@@ -24,12 +24,11 @@ public class CategoryService : ICategoryService
         _context = context;
     }
 
-    public async Task<List<Categories>> GetAllCategoriesAsync()
+    public IQueryable<Categories> GetAllCategoriesQuery()
     {
-        return await _context.Categories
-            .Where(c => c.DeletedAt == null)
-            .ToListAsync();
+        return _context.Categories.Where(c => c.DeletedAt == null);       
     }
+
     public async Task<Categories> GetCategoryByIdAsync(int id)
     {
         return await _context.Categories
