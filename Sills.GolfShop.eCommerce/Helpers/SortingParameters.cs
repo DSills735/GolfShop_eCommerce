@@ -2,7 +2,7 @@
 {
     public class ProductParameters
     {
-        public string name { get; set; }
+        public string? name { get; set; }
         public decimal? minPrice { get; set; }
         public decimal? maxPrice { get; set; }
 
@@ -11,7 +11,7 @@
 
     public class CategoryParameters
     {
-        public string name { get; set; }
+        public string? name { get; set; }
         public string? sortBy { get; set; } = null;
     }
      public class SalesParameters
