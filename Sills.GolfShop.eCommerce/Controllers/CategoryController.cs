@@ -14,7 +14,7 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
         private readonly ICategoryService _categoryService = categoryService;
 
         [HttpGet]
-        public async Task<ActionResult<List<Categories>>> GetAllCategories([FromQuery] PaginationParameters param)
+        public async Task<ActionResult<List<Categories>>> GetAllCategories([FromQuery] PaginationParameters param, [FromQuery] CategoryParameters categoryParams)
         {
             var query = _categoryService.GetAllCategoriesQuery();
 
@@ -24,6 +24,12 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
                    .Skip((param.PageNumber - 1) * param.PageSize)
                    .Take(param.PageSize)
                    .ToListAsync();
+
+            query = categoryParams.sortBy switch
+            { 
+                "name_desc" => query.OrderByDescending(p => p.Name),
+                _ => query.OrderBy(p => p.Name)
+            };
 
             return Ok(pagedCategories);
         }
