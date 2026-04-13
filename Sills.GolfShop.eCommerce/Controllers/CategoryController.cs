@@ -17,27 +17,25 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
         public async Task<ActionResult<List<Categories>>> GetAllCategories([FromQuery] PaginationParameters param, [FromQuery] CategoryParameters categoryParams)
         {
             var query = _categoryService.GetAllCategoriesQuery();
+            query = categoryParams.sortBy switch
+            {
+                "name_desc" => query.OrderByDescending(p => p.Name),
+                _ => query.OrderBy(p => p.Name)
+            };
 
- 
             var pagedCategories = await query
                    .Where(c => c.DeletedAt == null)
                    .Skip((param.PageNumber - 1) * param.PageSize)
                    .Take(param.PageSize)
                    .ToListAsync();
 
-            query = categoryParams.sortBy switch
-            { 
-                "name_desc" => query.OrderByDescending(p => p.Name),
-                _ => query.OrderBy(p => p.Name)
-            };
-
             return Ok(pagedCategories);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Categories> GetCategoryById(int id)
+        public async Task<ActionResult<Categories>> GetCategoryById(int id)
         {
-            var category = _categoryService.GetCategoryByIdAsync(id);
+            var category = await _categoryService.GetCategoryByIdAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -46,16 +44,16 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Categories> CreateCategory(Categories category)
+        public async Task<ActionResult<Categories>> CreateCategory(Categories category)
         {
-            var createdCategory = _categoryService.CreateCategoryAsync(category);
+            var createdCategory = await _categoryService.CreateCategoryAsync(category);
             return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.Id }, createdCategory);
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateCategory(int id, Categories category)
         {
-            var existingCategory = _categoryService.GetCategoryByIdAsync(id);
+            var existingCategory =  _categoryService.GetCategoryByIdAsync(id);
             if (existingCategory == null)
             {
                 return NotFound();
