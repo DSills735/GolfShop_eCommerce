@@ -1,0 +1,99 @@
+{
+  "info": {
+    "name": "Sills Golf Shop eCommerce API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/Product?PageNumber=1&PageSize=10",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "Product" ],
+              "query": [
+                {
+                  "key": "PageNumber",
+                  "value": "1"
+                },
+                {
+                  "key": "PageSize",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Driver\",\n    \"description\": \"Titanium face driver\",\n    \"price\": 499.99,\n    \"quantityInStock\": 25,\n    \"categoryId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/api/Product"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/Category?PageNumber=1&PageSize=10&sortBy=name"
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Clubs\",\n    \"description\": \"Drivers, Irons, and Putters\"\n}"
+            },
+            "url": "{{baseUrl}}/api/Category"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sales",
+      "item": [
+        {
+          "name": "Get All Sales",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/Sales?PageNumber=1&PageSize=10"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:7000",
+      "type": "string"
+    }
+  ]
+}

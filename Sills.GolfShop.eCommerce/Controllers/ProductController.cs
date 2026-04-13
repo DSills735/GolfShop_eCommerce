@@ -24,9 +24,9 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Product> GetProductById(int id)
+        public async Task<ActionResult<Product>> GetProductById(int id)
         {
-            var product = _productService.GetProductByIdAsync(id).Result;
+            var product = await _productService.GetProductByIdAsync(id);
             if (product == null)
             {
                 return NotFound();
@@ -34,9 +34,9 @@ namespace Sills.GolfShop.eCommerceAPI.Controllers
             return Ok(product);
         }
         [HttpPost]
-        public ActionResult<Product> CreateProduct(Product product)
+        public async Task<ActionResult<Product>> CreateProduct(Product product)
         {
-            var createdProduct = _productService.CreateProductAsync(product).Result;
+            var createdProduct = await _productService.CreateProductAsync(product);
             return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
         }
 
