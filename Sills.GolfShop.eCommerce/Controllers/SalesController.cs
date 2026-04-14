@@ -21,46 +21,46 @@ public class SalesController(ISalesService salesService) : ControllerBase
                .Take(param.PageSize)
                .ToList();
 
-        return Ok(sales);
-    }
-    [HttpGet("{id}")]
-    public ActionResult<Sales> GetSaleById(int id)
-    {
-        var sale = _salesService.GetSaleByIdAsync(id).Result;
-        if (sale == null)
-        {
-            return NotFound();
+            return Ok(sales);
         }
-        return Ok(sale);
-    }
-    [HttpPost]
-    public ActionResult<Sales> CreateSale(Sales sale)
-    {
-        var createdSale = _salesService.CreateSaleAsync(sale).Result;
-        return CreatedAtAction(nameof(GetSaleById), new { id = createdSale.Id }, createdSale);
-    }
-    [HttpPut("{id}")]
-    public IActionResult UpdateSale(int id, Sales sale)
-    {
-        var existingSale = _salesService.GetSaleByIdAsync(id).Result;
-        if (existingSale == null)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Sales>> GetSaleById(int id)
         {
-            return NotFound();
+            var sale = await _salesService.GetSaleByIdAsync(id);
+            if (sale == null)
+            {
+                return NotFound();
+            }
+            return Ok(sale);
         }
-        _salesService.UpdateSaleAsync(id, sale).Wait();
-        return NoContent();
-    }
-    
-    [HttpDelete("{id}")]
-            public IActionResult DeleteSale(int id)
-    {
-        var existingSale = _salesService.GetSaleByIdAsync(id).Result;
-        if (existingSale == null)
+        [HttpPost]
+        public async Task<ActionResult<Sales>> CreateSale(Sales sale)
         {
-            return NotFound();
+            var createdSale = await _salesService.CreateSaleAsync(sale);
+            return CreatedAtAction(nameof(GetSaleById), new { id = createdSale.Id }, createdSale);
         }
-        _salesService.DeleteSaleAsync(id).Wait();
-        return NoContent();
+        [HttpPut("{id}")]
+        public IActionResult UpdateSale(int id, Sales sale)
+        {
+            var existingSale = _salesService.GetSaleByIdAsync(id).Result;
+            if (existingSale == null)
+            {
+                return NotFound();
+            }
+            _salesService.UpdateSaleAsync(id, sale).Wait();
+            return NoContent();
+        }
+        
+        [HttpDelete("{id}")]
+                public IActionResult DeleteSale(int id)
+        {
+            var existingSale = _salesService.GetSaleByIdAsync(id).Result;
+            if (existingSale == null)
+            {
+                return NotFound();
+            }
+            _salesService.DeleteSaleAsync(id).Wait();
+            return NoContent();
+        }
+        
     }
-    
-}
