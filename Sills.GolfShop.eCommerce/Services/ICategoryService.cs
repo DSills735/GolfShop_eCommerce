@@ -3,7 +3,7 @@ using Sills.GolfShop.eCommerceAPI.Data;
 using Sills.GolfShop.eCommerceAPI.Models;
 using Sills.GolfShop.eCommerceAPI.Services;
 
-namespace Sills.GolfShop.eCommerceAPI.Services
+namespace Sills.GolfShop.eCommerceAPI.Services;
 {
 
     public interface ICategoryService
