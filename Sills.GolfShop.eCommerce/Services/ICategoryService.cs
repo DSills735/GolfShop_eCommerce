@@ -4,7 +4,7 @@ using Sills.GolfShop.eCommerceAPI.Models;
 using Sills.GolfShop.eCommerceAPI.Services;
 
 namespace Sills.GolfShop.eCommerceAPI.Services;
-{
+
 
     public interface ICategoryService
     {
@@ -14,7 +14,7 @@ namespace Sills.GolfShop.eCommerceAPI.Services;
         Task UpdateCategoryAsync(int id, Categories category);
         Task DeleteCategoryAsync(int id);
     }
-}
+
 public class CategoryService : ICategoryService
 {
     private readonly GolfShopDbContext _context;

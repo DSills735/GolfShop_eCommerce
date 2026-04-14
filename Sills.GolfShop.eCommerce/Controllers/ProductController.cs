@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sills.GolfShop.eCommerceAPI.DTO;
 using Sills.GolfShop.eCommerceAPI.Helpers;
 using Sills.GolfShop.eCommerceAPI.Models;
 using Sills.GolfShop.eCommerceAPI.Services;
@@ -41,14 +42,18 @@ public class ProductController(IProductsService productsService) : ControllerBas
         }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateProduct(int id, Product product)
+    public async Task<IActionResult> UpdateProduct(int id, Product product, ProductUpdateDto productUpdateDto)
     {
         var existingProduct = _productService.GetProductByIdAsync(id).Result;
         if (existingProduct == null)
         {
             return NotFound();
         }
-        _productService.UpdateProductAsync(id, product).Wait();
+        existingProduct.Name = productUpdateDto.Name;
+        existingProduct.Description = productUpdateDto.Description;
+        existingProduct.QuantityInStock = productUpdateDto.QuantityInStock;
+
+        await _productService.UpdateProductAsync(id, existingProduct);
         return NoContent();
     }
 
@@ -61,6 +66,7 @@ public class ProductController(IProductsService productsService) : ControllerBas
             return NotFound();
         }
         _productService.DeleteProductAsync(id).Wait();
+
         return NoContent();
     }
 }
