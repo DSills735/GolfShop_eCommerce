@@ -23,22 +23,22 @@ public class ProductController(IProductsService productsService) : ControllerBas
         return Ok(products);
     }
 
-    [HttpGet("{id}")]
-    public ActionResult<Product> GetProductById(int id)
-    {
-        var product = _productService.GetProductByIdAsync(id).Result;
-        if (product == null)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> GetProductById(int id)
         {
-            return NotFound();
+            var product = await _productService.GetProductByIdAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
         }
-        return Ok(product);
-    }
-    [HttpPost]
-    public ActionResult<Product> CreateProduct(Product product)
-    {
-        var createdProduct = _productService.CreateProductAsync(product).Result;
-        return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
-    }
+        [HttpPost]
+        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        {
+            var createdProduct = await _productService.CreateProductAsync(product);
+            return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
+        }
 
     [HttpPut("{id}")]
     public IActionResult UpdateProduct(int id, Product product)
