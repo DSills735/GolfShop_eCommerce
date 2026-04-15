@@ -42,7 +42,7 @@ public class ProductController(IProductsService productsService) : ControllerBas
         }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateProduct(int id, Product product, ProductUpdateDto productUpdateDto)
+    public async Task<IActionResult> UpdateProduct(int id, ProductUpdateDto productUpdateDto)
     {
         var existingProduct = _productService.GetProductByIdAsync(id).Result;
         if (existingProduct == null)
