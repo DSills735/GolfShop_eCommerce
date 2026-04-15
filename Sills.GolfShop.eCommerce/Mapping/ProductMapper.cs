@@ -2,11 +2,11 @@
 {
     public static class ProductMapper
     {
+        public static DTO.ProductDto ToDTO(this Models.Product product)
         public static DTO.ProductUpdateDto ToDTO(this Models.Product product)
         {
             if (product == null) return null;
-            
-            return new DTO.ProductUpdateDto
+            return new DTO.ProductDTO
             {
                 Name = product.Name,
                 Description = product.Description,
