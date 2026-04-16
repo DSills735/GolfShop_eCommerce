@@ -6,7 +6,7 @@
         public static DTO.ProductUpdateDto ToDTO(this Models.Product product)
         {
             if (product == null) return null;
-            return new DTO.ProductDTO
+            return new DTO.ProductUpdateDTO
             {
                 Name = product.Name,
                 Description = product.Description,
