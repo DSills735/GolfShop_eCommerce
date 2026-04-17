@@ -18,6 +18,7 @@ internal class ProductService
 
     internal async Task GetAllProductsAsync()
     {
+        //TODO is pagination causing issue here?
         try
         {
             string response = await client.GetStringAsync("api/Product");
@@ -40,6 +41,7 @@ internal class ProductService
 
             }
         }
+        
         catch (HttpRequestException ex)
         {
             Console.WriteLine($"Error fetching products: {ex.Message}");

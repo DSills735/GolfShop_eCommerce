@@ -11,7 +11,7 @@ internal class MainMenu
 
         while (running)
         {
-            Console.Clear();
+            //Console.Clear();
 
             AnsiConsole.Write(
                 new FigletText("Sills Golf Shop")
@@ -38,6 +38,7 @@ internal class MainMenu
                     break;
 
                 case "Shop All Products":
+                    Console.Clear();
                     ProductService productService = new ProductService();
                     await productService.GetAllProductsAsync();
                     break;
