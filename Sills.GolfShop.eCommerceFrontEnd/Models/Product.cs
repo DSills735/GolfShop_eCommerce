@@ -24,8 +24,9 @@ public class Product
     public DateTime? DeletedAt { get; set; }
     [JsonProperty("ProductSales")]
     public List<ProductSales> ProductSales { get; } = [];
+
     [JsonProperty("CategoryId")]
-    public int categoryId { get; internal set; }
+    public int CategoryId { get; internal set; }
 
 
 }

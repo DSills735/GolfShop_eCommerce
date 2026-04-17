@@ -2,13 +2,13 @@
 
 namespace Sills.GolfShop.eCommerceFrontEnd.Models;
 
-internal class ProductSales
+public class ProductSales
 {
     [JsonProperty("ProductSales")]
     public required List<ProductSale> ProductSalesList { get; set; }
 }
 
-internal class ProductSale
+public class ProductSale
 {
     [JsonProperty("Id")]
     public int Id { get; set; }

@@ -17,7 +17,8 @@ public class Category
     public string Description { get; set; }
     [JsonProperty("DeletedAt")]
     public DateTime? DeletedAt { get; set; }
-    [JsonProperty("Products")]
+}
+    //[JsonProperty("Products")]
 
     // public List<Product> Products { get; } = [];
-}
+
