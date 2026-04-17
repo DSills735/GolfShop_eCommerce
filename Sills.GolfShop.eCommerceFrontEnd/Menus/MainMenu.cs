@@ -1,10 +1,11 @@
-﻿using Spectre.Console;
+﻿using Sills.GolfShop.eCommerceFrontEnd.Services;
+using Spectre.Console;
 
 namespace Sills.GolfShop.eCommerceFrontEnd.Menus;
 
-internal static class MainMenu
+internal class MainMenu
 {
-    public static void MainDisplay()
+    public static async Task MainDisplayAsync()
     {
         bool running = true;
 
@@ -21,30 +22,39 @@ internal static class MainMenu
                 new SelectionPrompt<string>()
                     .Title("What would you like to do?")
                     .AddChoices(new[] {
-                    "View All Products",
-                    "Choose a category",
-                    "Cart",
+                     "Search for a product",
+                    "Shop All Products",
+                    "Shop from a category",
+                    "View Cart",
                     "Checkout",
                     "View Order History",
                     "Exit"
                     }));
 
-
             switch (choice)
             {
-                case "View All Products":
-                    //ProductMenu.DisplayProducts();
+                case "Search for a product":
+                    //SearchMenu.DisplaySearch();
                     break;
-                case "Choose a category":
+
+                case "Shop All Products":
+                    ProductService productService = new ProductService();
+                    await productService.GetAllProductsAsync();
+                    break;
+
+                case "Shop from a category":
                     //CategoryMenu.DisplayCategories();
                     break;
-                case "Cart":
+                case "View Cart":
                     //CartMenu.DisplayCart();
                     break;
+
                 case "Checkout":
                     break;
+
                 case "View Order History":
                     break;
+
                 case "Exit":
                     Environment.Exit(0);
                     break;
