@@ -30,10 +30,10 @@ internal class ProductService
             }
             var deserializedProducts = JsonConvert.DeserializeObject<List<Product>>(response);
 
-            if (deserializedProducts != null && deserializedProducts.Count > 0)
-            {
-                ProductVisualizations.DisplayProductsTable(deserializedProducts);
 
+            if (deserializedProducts != null && deserializedProducts.Count > 0)
+            {              
+                ProductVisualizations.DisplayProductsTable(deserializedProducts);
             }
             else
             {
