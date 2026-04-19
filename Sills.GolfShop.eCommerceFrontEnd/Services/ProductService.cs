@@ -21,9 +21,9 @@ internal class ProductService
         //TODO is pagination causing issue here?
         try
         {
-            string response = await client.GetStringAsync("api/Product");
+            var response = await client.GetStringAsync("api/Product?PageNumber=1&PageSize=10");
 
-            if (string.IsNullOrEmpty(response))
+            if (response == null)
             {
                 Console.WriteLine("No products found.");
                 return;

@@ -14,13 +14,15 @@ public class ProductController(IProductsService productsService) : ControllerBas
     private readonly IProductsService _productService = productsService;
 
     [HttpGet]
-    public ActionResult<List<Product>> GetAllProducts(PaginationParameters param)
+    public ActionResult<List<Product>> GetAllProducts([FromQuery]PaginationParameters param)
     {
         var products = _productService.GetAllProductsAsync().Result;
+        
         var pagedProducts = products
             .Skip((param.PageNumber - 1) * param.PageSize)
             .Take(param.PageSize)
             .ToList();
+        
         return Ok(products);
     }
 
