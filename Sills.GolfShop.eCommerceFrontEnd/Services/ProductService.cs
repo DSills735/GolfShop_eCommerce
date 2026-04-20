@@ -18,7 +18,7 @@ internal class ProductService
 
     internal async Task GetAllProductsAsync()
     {
-        //TODO is pagination causing issue here?
+        //TODO finish once admin area is done.
         try
         {
             var response = await client.GetStringAsync("api/Product?PageNumber=1&PageSize=20");

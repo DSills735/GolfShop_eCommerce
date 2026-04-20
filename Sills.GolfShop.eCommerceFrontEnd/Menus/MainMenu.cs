@@ -28,6 +28,7 @@ internal class MainMenu
                     "View Cart",
                     "Checkout",
                     "View Order History",
+                    "Administration Menu",
                     "Exit"
                     }));
 
@@ -55,6 +56,9 @@ internal class MainMenu
 
                 case "View Order History":
                     break;
+
+                case "Administration Menu":
+                    break; 
 
                 case "Exit":
                     Environment.Exit(0);
