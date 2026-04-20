@@ -16,6 +16,8 @@ internal class ProductService
         client.Timeout = TimeSpan.FromSeconds(30);
     }
 
+    
+
     internal async Task GetAllProductsAsync()
     {
         //TODO finish once admin area is done.
@@ -58,5 +60,9 @@ internal class ProductService
             Console.WriteLine($"Unexpected error: {ex.Message}");
             return;
         }
+    }
+    internal static async Task AddProduct(Product product)
+    {
+        throw new NotImplementedException();
     }
 }

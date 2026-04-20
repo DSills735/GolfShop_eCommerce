@@ -1,4 +1,6 @@
-﻿using Spectre.Console;
+﻿using Sills.GolfShop.eCommerceFrontEnd.Models;
+using Sills.GolfShop.eCommerceFrontEnd.Services;
+using Spectre.Console;
 
 namespace Sills.GolfShop.eCommerceFrontEnd.Controllers;
 
@@ -15,7 +17,17 @@ internal class ProductsController
         //Add category list to assign category to the product?? 
 
 
- 
+        Product product = new Product
+        {
+            Name = ProductName,
+            Description = ProductDescription,
+            Price = ProductPrice,
+            QuantityInStock = ProductQuantity
+        };
+
+        //TODO call product service to finalize addition
+
+        await ProductService.AddProduct(product);
 
 
     }
